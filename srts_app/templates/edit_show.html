@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Update</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+</head>
+<body>
+    <div class="container">
+        {% if messages %}
+        <ul class="messages">    
+            {% for message in messages %}    
+                <li {% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>    
+            {% endfor %}
+        </ul>
+        {% endif %}
+        <form action="/shows/{{ id }}/update" method="POST">
+        {% csrf_token %}
+            <div class="row">
+                <div class="col-sm-8">
+                    <h1>Add a New Show</h1>
+                </div>
+                <div class="col-sm-4 text-right">
+                    <a href="/shows">Go Back</a>
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="title">Title</label>
+                    <input name="title" class="form-control" type="text" value="{{ title }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-6">
+                    <label for="network">Network</label>
+                    <input name="network" class="form-control" type="text" value="{{ network }}">
+                </div>
+                <div class="form-group col-sm-6">
+                    <label for="release_date">Release Date</label>
+                    <input name="release_date" class="form-control" type="date" value="{{ release_date | date:'Y-m-d' }}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="form-group col-sm-12">
+                    <label for="description">Description</label>
+                    <textarea name="description" class="form-control" name="description" id="description" cols="30" rows="5">{{ description }}</textarea>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <button type="submit" class="btn btn-primary">Update</button>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-sm-12 text-center">
+                    <a href="/shows/{{ id }}">Go to Show</a>
+                </div>
+            </div>
+        </form>
+    </div>
+</body>
+</html>
